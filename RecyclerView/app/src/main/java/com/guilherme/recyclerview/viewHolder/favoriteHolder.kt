@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.guilherme.recyclerview.R
 import com.squareup.picasso.Picasso
 
-class homeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class favoriteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(index: String){
-    val txtTitle = itemView.findViewById<TextView>(R.id.idTitle)
+        val txtTitle = itemView.findViewById<TextView>(R.id.idTitleFav)
         txtTitle.text = index
     }
+
     fun image(index: String){
-        val imgPoster = itemView.findViewById<ImageView>(R.id.imgPoster)
+        val imgPoster = itemView.findViewById<ImageView>(R.id.imgPosterFavorite)
         Picasso.get()
             .load("https://image.tmdb.org/t/p/original$index")
             .into(imgPoster)
