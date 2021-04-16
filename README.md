@@ -23,11 +23,11 @@ https://developers.themoviedb.org/3/getting-started/introduction
 
  
  ## Prints
-![Imgur](https://i.imgur.com/QdoLX1S.png)
+![Imgur](https://i.imgur.com/oVr6ePA.png)
 
-![Imgur](https://i.imgur.com/TdPjcjR.png)
+![Imgur](https://i.imgur.com/10vxwrR.png)
 
-![Imgur](https://i.imgur.com/M8fcfBf.png)
+![Imgur](https://i.imgur.com/ND2IhDe.png)
 
 ## License
 
