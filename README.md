@@ -23,7 +23,7 @@ https://developers.themoviedb.org/3/getting-started/introduction
 
  
  ## Prints
-![Imgur](https://i.imgur.com/bVQ1kYR.png)
+![Imgur](https://i.imgur.com/8YPaiau.png)
 
 ![Imgur](https://i.imgur.com/bVQ1kYR.png)
 
