@@ -1,6 +1,5 @@
 package com.guilherme.recyclerview
 
-import androidx.room.Dao
 import com.google.gson.annotations.SerializedName
 import com.guilherme.recyclerview.repository.MovieEntity
 import java.io.Serializable
@@ -12,7 +11,6 @@ data class PostModel(
     var resultads: List<Results> = emptyList()
 )
 
-@Dao
 data class Results(
     @SerializedName("id")
     var id: Int = 0,

@@ -10,27 +10,15 @@ class MovieRepository (context: Context){
     private val mDataBase = MovieDataBase.getDataBase(context).movieDAO()
     private val mRetrofit = RetrofitClient.createService(GetService::class.java)
 
-    suspend fun save(movie: List<MovieEntity>){
-        return mDataBase.save(movie)
-    }
+    suspend fun save(movie: List<MovieEntity>) = mDataBase.save(movie)
 
-    suspend fun getFavorites():List<MovieEntity>{
-        return mDataBase.getFavorites()
-    }
+    suspend fun getFavorites():List<MovieEntity> = mDataBase.getFavorites()
 
-    suspend fun update(movie: MovieEntity){
-        return mDataBase.updateMovie(movie)
-    }
+    suspend fun update(movie: MovieEntity) = mDataBase.updateMovie(movie)
 
-    suspend fun getMovie(title: String): MovieEntity{
-        return mDataBase.getMovie(title)
-    }
+    suspend fun getMovie(title: String): MovieEntity = mDataBase.getMovie(title)
 
-    suspend fun getItemFavorite(title: String): Int{
-        return mDataBase.getItemFavorite(title)
-    }
+    suspend fun getItemFavorite(title: String): Int = mDataBase.getItemFavorite(title)
 
-    suspend fun getListaFilmes() : PostModel{
-        return mRetrofit.list()
-    }
+    suspend fun getListaFilmes() : PostModel = mRetrofit.list()
 }
