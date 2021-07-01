@@ -12,21 +12,22 @@ class RetrofitClient private constructor() {
 
         private val baseUrl = "https://api.themoviedb.org/3/movie/"
 
-        private fun getRetrofitInstance(): Retrofit {
+        fun getRetrofitInstance(): Retrofit {
+
             val httpClient = OkHttpClient.Builder()
             if (!Companion::retrofit.isInitialized) {
-
                 retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .client(httpClient.build())
-                    .addConverterFactory(GsonConverterFactory.create())//converte o json para class kotlin
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
             return retrofit
         }
 
-        fun <T> createService(serviceClass: Class<T>): T{
+        fun <S> createService(serviceClass: Class<S>): S {
             return getRetrofitInstance().create(serviceClass)
         }
+
     }
 }

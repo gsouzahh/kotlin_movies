@@ -25,16 +25,16 @@ data class MovieEntity(
     var vote_average: String,
 
     @ColumnInfo(name = "release_date")
-    var release_date: String,
+    var release_date: String? = "",
 
     @ColumnInfo(name = "favorite")
     var favorited: Int
 ) : Serializable {
-    fun convertToDBMovie(data: MovieEntity): Results {
+    fun convertToDBMovie(): Results {
         return Results(
             title = this.title,
             overview = this.overview,
-            release_date = this.release_date,
+            release_date = this.release_date ?: "",
             poster_path = this.poster_path,
             vote_average = this.vote_average,
         )

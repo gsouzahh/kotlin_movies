@@ -17,10 +17,8 @@ class FavoriteAdapter(context: Context) : RecyclerView.Adapter<favoriteHolder>()
     var repository = MovieRepository(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): favoriteHolder {
-        var layoutItem = LayoutInflater.from(parent.context)
+        val layoutItem = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_list_item_favorite, parent, false)
-
-        lista = repository.getFavorites()
 
         return favoriteHolder(layoutItem)
     }
@@ -32,9 +30,8 @@ class FavoriteAdapter(context: Context) : RecyclerView.Adapter<favoriteHolder>()
         holder.itemView.setOnClickListener {
             val currentItem = lista[position]
             val myBundle = Bundle()
-            val convertCurrent = currentItem.convertToDBMovie(currentItem)
 
-            myBundle.putSerializable("movieItem", convertCurrent)
+            myBundle.putSerializable("movieItem", currentItem.convertToDBMovie())
 
             Navigation.findNavController(holder.itemView)
                 .navigate(R.id.action_favoritesFragment_to_detailsFragment2, myBundle)
@@ -42,6 +39,11 @@ class FavoriteAdapter(context: Context) : RecyclerView.Adapter<favoriteHolder>()
     }
 
     override fun getItemCount(): Int {
-        return repository.getFavorites().count()
+        return lista.count()
+    }
+
+    fun getList(list: List<MovieEntity>){
+        lista = list
+        notifyDataSetChanged()
     }
 }

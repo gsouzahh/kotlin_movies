@@ -12,21 +12,20 @@ import com.guilherme.recyclerview.viewHolder.homeHolder
 
 class HomeAdapter() : RecyclerView.Adapter<homeHolder>() {
 
-    private var lista: List<Results> = arrayListOf()
+    private var listCurrent: List<Results> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): homeHolder {
-        val layout_Item = LayoutInflater.from(parent.context).inflate(R.layout.list_item_home, parent, false)
-
-        return homeHolder(layout_Item)
+        val layoutItem = LayoutInflater.from(parent.context).inflate(R.layout.list_item_home, parent, false)
+        return homeHolder(layoutItem)
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: homeHolder, position: Int) {
-        holder.bind(lista[position].title)
-        holder.image(lista[position].poster_path)
+        holder.bind(listCurrent[position].title)
+        holder.image(listCurrent[position].poster_path)
 
         holder.itemView.setOnClickListener {
-            val currentItem = lista[position]
+            val currentItem = listCurrent[position]
             val myBundle = Bundle()
             myBundle.putSerializable("movieItem", currentItem)
 
@@ -35,11 +34,11 @@ class HomeAdapter() : RecyclerView.Adapter<homeHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return lista.count()
+        return listCurrent.count()
     }
 
     fun updateGuest(list: List<Results>) {
-        lista = list
+        listCurrent = list
         notifyDataSetChanged()
     }
 }

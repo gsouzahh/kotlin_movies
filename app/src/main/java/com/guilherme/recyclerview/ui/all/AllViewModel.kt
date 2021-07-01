@@ -1,22 +1,25 @@
 package com.guilherme.recyclerview.ui.all
 
 import android.app.Application
-import android.content.Context
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.guilherme.recyclerview.Results
-import com.guilherme.recyclerview.repository.MovieDataBase
+import com.guilherme.recyclerview.repository.MovieRepository
+import kotlinx.coroutines.launch
 
 class AllViewModel(application: Application) : AndroidViewModel(application) {
 
-    var list: List<Results>? = null
+    var repo: MovieRepository = MovieRepository(application)
 
     private val mList = MutableLiveData<List<Results>>()
     val mLista: LiveData<List<Results>> = mList
 
-    fun load() = mList.postValue(list)
-
-
+    fun retrofit() {
+        viewModelScope.launch {
+            val filmes = repo.getListaFilmes()
+            mList.postValue(filmes.resultads)
+            repo.save(filmes.resultads.map {
+                it.convertToDBMovie()
+            })
+        }
+    }
 }

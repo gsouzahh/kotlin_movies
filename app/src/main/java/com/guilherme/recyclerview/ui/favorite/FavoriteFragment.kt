@@ -7,30 +7,36 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.guilherme.recyclerview.R
 import com.guilherme.recyclerview.adapter.FavoriteAdapter
+import com.guilherme.recyclerview.databinding.FragmentFavoritesBinding
 
 class FavoriteFragment : Fragment() {
 
+    private var _binding: FragmentFavoritesBinding? = null
+    private val binding: FragmentFavoritesBinding get() = _binding!!
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var favoriteAdapter: FavoriteAdapter
 
-    lateinit var favoriteAdapter: FavoriteAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        favoriteViewModel =
-            ViewModelProvider(this).get(FavoriteViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
+        favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
+        favoriteViewModel.require()
 
-        val recycler = root.findViewById<RecyclerView>(R.id.recyclerFavorite)
+        favoriteAdapter = FavoriteAdapter(binding.recyclerFavorite.context)
 
-        favoriteAdapter = FavoriteAdapter(recycler.context)
+        binding.recyclerFavorite.layoutManager = LinearLayoutManager(context)
+        binding.recyclerFavorite.adapter = favoriteAdapter
+        return binding.root
+    }
 
-        recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = favoriteAdapter
-
-        return root
+    override fun onResume() {
+        super.onResume()
+        favoriteViewModel.mListFavorite.observe(viewLifecycleOwner, {
+            favoriteAdapter.getList(it)
+        })
     }
 }

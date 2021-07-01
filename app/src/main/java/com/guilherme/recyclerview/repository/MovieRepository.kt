@@ -1,28 +1,36 @@
 package com.guilherme.recyclerview.repository
 
 import android.content.Context
+import com.guilherme.recyclerview.PostModel
+import com.guilherme.recyclerview.api.GetService
+import com.guilherme.recyclerview.api.RetrofitClient
 
 class MovieRepository (context: Context){
     //acesso ao banco de dados
     private val mDataBase = MovieDataBase.getDataBase(context).movieDAO()
+    private val mRetrofit = RetrofitClient.createService(GetService::class.java)
 
-    fun save(movie: List<MovieEntity>){
+    suspend fun save(movie: List<MovieEntity>){
         return mDataBase.save(movie)
     }
 
-    fun getFavorites():List<MovieEntity>{
+    suspend fun getFavorites():List<MovieEntity>{
         return mDataBase.getFavorites()
     }
 
-    fun update(movie: MovieEntity){
+    suspend fun update(movie: MovieEntity){
         return mDataBase.updateMovie(movie)
     }
 
-    fun getMovie(title: String): MovieEntity{
+    suspend fun getMovie(title: String): MovieEntity{
         return mDataBase.getMovie(title)
     }
 
-    fun getItemFavorite(title: String): Int{
+    suspend fun getItemFavorite(title: String): Int{
         return mDataBase.getItemFavorite(title)
+    }
+
+    suspend fun getListaFilmes() : PostModel{
+        return mRetrofit.list()
     }
 }
