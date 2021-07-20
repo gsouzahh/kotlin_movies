@@ -13,6 +13,7 @@ class homeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val txtTitle = itemView.findViewById<TextView>(R.id.idTitle)
         txtTitle.text = index
     }
+
     fun image(index: String){
         val imgPoster = itemView.findViewById<ImageView>(R.id.imgPoster)
         Picasso.get()

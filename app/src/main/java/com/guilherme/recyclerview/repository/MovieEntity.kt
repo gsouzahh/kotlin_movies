@@ -29,6 +29,7 @@ data class MovieEntity(
 
     @ColumnInfo(name = "favorite")
     var favorited: Int
+
 ) : Serializable {
     fun convertToDBMovie(): Results {
         return Results(
